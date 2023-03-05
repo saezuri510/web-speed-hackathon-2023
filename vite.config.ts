@@ -2,6 +2,7 @@ import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import viteCompression from 'vite-plugin-compression';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import wasm from 'vite-plugin-wasm';
@@ -22,18 +23,6 @@ export default defineConfig(async () => {
   const videos = await getPublicFileList(path.resolve(publicDir, 'videos'));
 
   return {
-    build: {
-      assetsInlineLimit: 20480,
-      cssCodeSplit: false,
-      cssTarget: 'es6',
-      minify: false,
-      rollupOptions: {
-        output: {
-          experimentalMinChunkSize: 40960,
-        },
-      },
-      target: 'es2015',
-    },
     plugins: [
       react(),
       wasm(),
@@ -43,6 +32,7 @@ export default defineConfig(async () => {
         title: '買えるオーガニック',
         videos,
       }),
+      viteCompression({ algorithm: 'brotliCompress' }),
     ],
   };
 });
