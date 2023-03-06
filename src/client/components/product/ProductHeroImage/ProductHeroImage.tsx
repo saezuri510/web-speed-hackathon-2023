@@ -26,7 +26,7 @@ export const ProductHeroImage: FC<Props> = memo(({ product, title }) => {
             <Anchor href={`/product/${product.id}`}>
               <div className={styles.container()}>
                 <AspectRatio ratioHeight={9} ratioWidth={16}>
-                  {thumbnailFile && <img className={styles.image()} src={thumbnailFile.filename} />}
+                  {thumbnailFile && <img className={styles.image()} loading="lazy" src={thumbnailFile.filename} />}
                 </AspectRatio>
 
                 <div className={styles.overlay()}>
