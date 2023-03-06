@@ -23,14 +23,16 @@ export const ProductOverview: FC<Props> = memo(({ activeOffer, product }) => {
       return;
     }
 
-    const endTime = window.Temporal.Instant.from(activeOffer.endDate).toLocaleString('ja-jp', {
+    const date = new Date(activeOffer.endDate);
+
+    const endTime = new Intl.DateTimeFormat('ja-jp', {
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
       month: '2-digit',
       second: '2-digit',
       year: 'numeric',
-    });
+    }).format(date);
 
     return (
       <div className={styles.offerLabel()}>
