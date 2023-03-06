@@ -1,7 +1,8 @@
 import { css } from '@emotion/css';
 
-export const container = ({ clientHeight }: { clientHeight: number | undefined }) => css`
-  height: ${clientHeight ?? 0}px;
+export const container = ({ ratio }: { ratio: string }) => css`
+  aspect-ratio: ${ratio};
+  height: 100%;
   position: relative;
   width: 100%;
 `;
