@@ -30,6 +30,7 @@ export const MediaItemPreviewer: FC<Props> = ({ file }) => {
                 [styles.video__desktop()]: deviceType === DeviceType.DESKTOP,
                 [styles.video__mobile()]: deviceType === DeviceType.MOBILE,
               })}
+              preload="metadata"
               src={file.filename}
             />
           )}
