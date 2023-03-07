@@ -9,6 +9,7 @@ import route from 'koa-route';
 import send from 'koa-send';
 import session from 'koa-session';
 import serve from 'koa-static';
+import zipcodeJa from 'zipcode-ja';
 
 import type { Context } from './context';
 import { dataSource } from './data_source';
@@ -47,6 +48,25 @@ async function init(): Promise<void> {
         },
       }),
     ),
+  );
+
+  app.use(
+    route.get('/zipcode/:code', (ctx, code) => {
+      const target = zipcodeJa[code];
+      if (target === undefined) {
+        ctx.status = 404;
+        return;
+      }
+
+      const address = [...target.address];
+      const prefecture = address.splice(0, 1);
+      const city = address.join(' ');
+
+      ctx.response.body = {
+        city,
+        prefecture,
+      };
+    }),
   );
 
   app.use(
